@@ -2,6 +2,10 @@ import React from 'react'
 import {View, Text, Image} from 'react-native';
 import Botao from '../components/Botao';
 import cssBtnOngCliente from '../assets/css/styles-ong-cliente';
+import {getAuth, signOut } from 'firebase/auth';
+import app from '../src/config';
+
+const auth = getAuth(app);
 
 export default function ClienteONG(props){
     const formatText1 = {
@@ -19,6 +23,11 @@ export default function ClienteONG(props){
         marginBottom: 20, 
         alignSelf:'center'
     }
+    function sair(){
+        alert("Saindo do sistema");
+        signOut(auth);
+    }
+    
     return (
         <>
             <View style={props.clienteOngStyle}>
@@ -35,6 +44,12 @@ export default function ClienteONG(props){
                 <Botao title="ONG"
                     buttonStyle={cssBtnOngCliente.buttonOngCliente} 
                     titleStyle={cssBtnOngCliente.textoOngCliente}
+                />
+                <Botao
+                    title="Sair"
+                    buttonStyle={cssBtnOngCliente.buttonOngCliente}
+                    titleStyle={cssBtnOngCliente.textoOngCliente} 
+                    clique={sair}
                 />
             </View>
             <Text style={formatText2}>&copy;2021 Animal Care. All Rights Reserved</Text>      

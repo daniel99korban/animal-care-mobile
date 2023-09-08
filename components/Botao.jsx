@@ -7,6 +7,7 @@ export default function Botao(props){
             title={props.title}
             buttonStyle={props.buttonStyle} 
             titleStyle={props.titleStyle}
+            onPress={props.clique}
         />      
     );
 }

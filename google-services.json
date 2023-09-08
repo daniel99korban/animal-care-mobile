@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750880590889",
+    "project_id": "animal-care-app-react",
+    "storage_bucket": "animal-care-app-react.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750880590889:android:51f85fd75739751384e038",
+        "android_client_info": {
+          "package_name": "daniel.korban.apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750880590889-qr27c8ni6pl83ng502nel9id2a2j0i53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Q8H3o0YPKjP2u9H-_BnbWdJHLFXbAOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750880590889-qr27c8ni6pl83ng502nel9id2a2j0i53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
