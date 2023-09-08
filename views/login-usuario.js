@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
-// import { auth } from 'firebase';
-// import * as firebase from 'firebase';
-// import { initializeApp } from 'firebase/app';
 import {View, Text, Image, StyleSheet, TextInput, Button, Alert} from 'react-native';
-//import { Cliente } from '../models/Cliente';
-//import auth from '@react-native-firebase/auth';
-import app from '../src/config';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+} from "firebase/auth";
 
-const auth = getAuth(app);
-
+import { authentication } from '../src/firebase/config';
 
 export default function TelaLogin(props){
 
@@ -17,50 +13,45 @@ export default function TelaLogin(props){
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     
-    async function signIn() {
-        try{
-            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    const signIn = () =>{
+        signInWithEmailAndPassword(authentication, email, password)
+        .then((userCredential)=>{
             const user = userCredential.user;
             alert("Bem vindo(a)!");
-            usuarioNoSistema = true;
-            //console.log('Usuario logado: ', userCredential.user);
-        }catch(error){
-           if (error.code == 'auth/invalid-email') {
-              alert('Email invalido!');  
-              setError(error.message);
+        }).catch((error) => {
+            if (error.code == 'auth/invalid-email') {
+                alert('Email invalido!');
+                setError(error.message);
             } else {
-              alert('Usuario ou senha incorretos!');
-              setError(error.message);
+                alert('Usuario ou senha incorretos!');
+                setError(error.message);
             }
-        }
-
-
+        })  
     }
 
-    async function signUp() {
-        try{
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    const signUp = () => {
+        createUserWithEmailAndPassword(authentication, email, password)
+        .then((userCredential)=>{
             const user = userCredential.user;
-            alert("Bem vindo(a)!");
-            //console.log('Usuario logado: ', userCredential.user);
-        }catch(error){
-           if (error.code == 'auth/email-already-in-use') {
-              alert('Email ja em uso!');  
-              setError(error.message);
+            alert("Usuario cadastrado no sistema!");
+        })
+        .catch((error)=>{
+            if (error.code == 'auth/email-already-in-use') {
+               alert('Email ja em uso!');  
+               setError(error.message);
             }
-            if(error.code == 'auth/invalid-email') {
+            else if(error.code == 'auth/invalid-email') {
                 alert('Insira um email válido!');  
                 setError(error.message);
             }
-            if(error.code == 'auth/weak-password'){
+            else if(error.code == 'auth/weak-password'){
                 alert('Senha deve ter no minimo 6 caracteres');  
                 setError(error.message);
             }else {
-              alert('Usuario ou senha incorretos!');
-              setError(error.message);
+                alert('Usuario ou senha incorretos!');
+                setError(error.message);
             }
-        }
-
+        });
 
     }
 
